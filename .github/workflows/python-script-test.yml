@@ -1,1 +1,29 @@
+name: Python Script Test
+
+on: [push, pull_request]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        # Add any dependencies your script needs here, for example:
+        # pip install pandas openpyxl
+
+    - name: Run Python script
+      run: |
+        timeout 10s python to_do_in_excel.py
+      continue-on-error: false
 
